@@ -17,7 +17,7 @@ public interface ClienteService {
 
 	Cliente findById(Long id);
 	
-	void associarClienteCampanha(Long id);
+	void associarClienteCampanha(Long id) throws Exception;
 
 	    
 }

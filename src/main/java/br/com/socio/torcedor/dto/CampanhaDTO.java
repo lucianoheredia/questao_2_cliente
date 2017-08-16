@@ -10,7 +10,11 @@ import org.json.JSONObject;
 import com.google.gson.Gson;
 
 import br.com.socio.torcedor.model.Campanha;
-
+/**
+ * 
+ * @author Luciano
+ *
+ */
 public class CampanhaDTO {
 
 	public static List<Campanha> transJsonClass(String dados) {

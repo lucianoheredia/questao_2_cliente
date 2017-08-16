@@ -1,5 +1,7 @@
 package br.com.socio.torcedor.utils;
-
+/*
+ * 
+ */
 public class RestSocioTorcedorErrorType {
 	
 	private String mensagemErroReq;

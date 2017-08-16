@@ -1,5 +1,9 @@
 package br.com.socio.torcedor.model;
-
+/**
+ * 
+ * @author Luciano
+ *
+ */
 public class TimeCoracao {
 	
 	private Integer id;

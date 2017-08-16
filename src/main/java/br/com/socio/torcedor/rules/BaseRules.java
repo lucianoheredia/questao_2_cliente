@@ -13,7 +13,11 @@ import com.google.gson.Gson;
 import br.com.socio.torcedor.cliente.ClienteRepository;
 import br.com.socio.torcedor.kafka.TopicProducer;
 import br.com.socio.torcedor.model.Cliente;
-
+/**
+ * Regras de Negócios 
+ * @author Luciano
+ *
+ */
 public class BaseRules {
 
 	@Autowired

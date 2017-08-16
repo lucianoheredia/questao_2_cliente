@@ -9,7 +9,7 @@ import br.com.socio.torcedor.kafka.TopicProducer;
 import br.com.socio.torcedor.model.Cliente;
 
 /**
- * 
+ * Regras de negócios
  * @author Luciano
  *
  */
@@ -19,7 +19,7 @@ import br.com.socio.torcedor.model.Cliente;
 public class ClienteRules extends BaseRules {
 
 	public ClienteRules() throws Exception {
-		this.producer = new TopicProducer("ENVIO_FILA_CAMPANHA");
+		this.producer = new TopicProducer("ENVIO_FILA_CAMP");
 	}
 
 	public Boolean clienteValidation(Cliente cliente) throws ParseException {

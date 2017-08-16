@@ -69,7 +69,7 @@ public class ClienteServiceImpl implements ClienteService {
 	}
 
 	@Override
-	public void associarClienteCampanha(Long id){
+	public void associarClienteCampanha(Long id) throws Exception{
 		this.campanhaWS.associarClienteCampanha(id);
 	}
 

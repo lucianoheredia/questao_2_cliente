@@ -20,6 +20,11 @@ import br.com.socio.torcedor.dto.CampanhaDTO;
 import br.com.socio.torcedor.kafka.TopicProducer;
 import br.com.socio.torcedor.model.Campanha;
 
+/**
+ * Serviço criado para receber requisiçoes do projeto socio-torcedor
+ * @author Luciano
+ *
+ */
 
 @Service
 public class ClienteCampanhaWS implements ClienteCampanhaWSInterface {
@@ -68,15 +73,18 @@ public class ClienteCampanhaWS implements ClienteCampanhaWSInterface {
 		final HttpEntity<?> entity = new HttpEntity<Object>(param, header);
 
 		try {
-			restTemplate.put(URI_SERVICO_ASSOCIACAO, entity, param);
-		} catch (Exception e) {
 			
 			Gson gson = new Gson();
-			this.producer = new TopicProducer("FILA_CLUSTER_ASSOCIACAO");
+			this.producer = new TopicProducer("ENVIO_FILA_CAMP");
 			Campanha camp = new Campanha();
 			camp.setId(id);
 			
 			this.producer.send(gson.toJson(camp));
+			
+			restTemplate.put(URI_SERVICO_ASSOCIACAO, entity, param);
+		} catch (Exception e) {
+			e.getMessage();
+			
 		}
 		
 

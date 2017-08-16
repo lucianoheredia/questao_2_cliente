@@ -90,7 +90,7 @@ public class RestSocioTorcedorClienteController {
 	
 	
 	@RequestMapping(value = "/Cliente/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<?> updateCampanha(@PathVariable("id") Long id, UriComponentsBuilder builder) {
+	public ResponseEntity<?> updateCampanha(@PathVariable("id") Long id, UriComponentsBuilder builder) throws Exception {
 		clientService.associarClienteCampanha(id);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(builder.path("/api/Cliente/{id}").buildAndExpand(id).toUri());
