@@ -60,6 +60,15 @@ public class ClienteCampanhaWS implements ClienteCampanhaWSInterface {
 		return headers;
 	}
 
+	/*
+	 * SERVIÇO PARA ASSOCIAR O CLIENTE AS CAMPANHAS DO SEU TIME
+	 * Caso o serviço de CAMPANHAS esteja DOWN.
+	 * É enviado uma mensagem para a fila do KAFKA para ser consumida 
+	 * Assim que o Servidor da Aplicação de campanhas subir.
+	 * Pois na aplicação de campanha tem o CONSUMER do TOPICO que foi gerado 
+	 * Nesta aplicação.
+	 * @see br.com.socio.torcedor.ws.ClienteCampanhaWSInterface#associarClienteCampanha(java.lang.Long)
+	 */
 	@Override
 	public void associarClienteCampanha(Long id) throws Exception {
 		
@@ -72,17 +81,28 @@ public class ClienteCampanhaWS implements ClienteCampanhaWSInterface {
 		header.set("id", String.valueOf(id));
 		final HttpEntity<?> entity = new HttpEntity<Object>(param, header);
 
+		/*
+		 * Caso o Serviço de associação esteja fora do ar;
+		 * É produzida a mensagem para postar a fila do KAFKA 
+		 * Para ser Consumida quando o server de Campanhas 
+		 * Estiver fora do ar.
+		 */
 		try {
+			
+			restTemplate.put(URI_SERVICO_ASSOCIACAO, entity, param);
+			
+		} catch (Exception e) {
 			
 			Gson gson = new Gson();
 			this.producer = new TopicProducer("ENVIO_FILA_CAMP");
 			Campanha camp = new Campanha();
+			
+			//Aqui estou enviando apenas o id como exemplo.
 			camp.setId(id);
 			
+			//É possivél veririficar no console da aplicação de campanhas.
 			this.producer.send(gson.toJson(camp));
 			
-			restTemplate.put(URI_SERVICO_ASSOCIACAO, entity, param);
-		} catch (Exception e) {
 			e.getMessage();
 			
 		}
